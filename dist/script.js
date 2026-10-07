@@ -1,4 +1,4 @@
-const SITE = { brand: "Senn Digital", email: "projekt@senndigital.it" };
+const SITE = { brand: "Process Engine", email: "projekt@processengine.it" };
 
 document.querySelectorAll("[data-brand]").forEach((el) => el.textContent = SITE.brand);
 document.querySelectorAll("[data-email-link]").forEach((el) => { el.textContent = SITE.email; el.href = `mailto:${SITE.email}`; });
@@ -22,18 +22,51 @@ const observer = new IntersectionObserver((entries) => entries.forEach((entry) =
 }), { threshold: .12 });
 document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
 
-const cases = [
-  { label:"Automatisierung", title:"PDF-Daten ohne Abtippen übernehmen.", before:"Mitarbeiter übertragen jede Woche Daten aus PDFs manuell in Excel.", solution:"PDF hochladen, Daten automatisch erkennen, prüfen und als Excel-Datei exportieren.", result:"Weniger manuelle Eingabe. Weniger Fehler." },
-  { label:"Dateiverarbeitung", title:"Dokumente automatisch richtig ablegen.", before:"Rechnungen und Dokumente werden heruntergeladen, umbenannt und händisch abgelegt.", solution:"Dateien erkennen, einheitlich benennen und automatisch der richtigen Struktur zuordnen.", result:"Weniger Suchaufwand. Verlässliche Ablage." },
-  { label:"Individuelle Software", title:"Informationen an einem Ort verfügbar machen.", before:"Wichtige Informationen verteilen sich über Excel-Listen, E-Mails und Papier.", solution:"Eine einfache interne Web-App bündelt Daten, Status und Zuständigkeiten zentral.", result:"Ein gemeinsamer Stand. Klare Verantwortlichkeiten." },
-  { label:"Website", title:"Einen veralteten Auftritt klar erneuern.", before:"Die Website ist mobil schwer nutzbar, langsam und passt nicht mehr zum Unternehmen.", solution:"Eine schnelle, responsive Website mit klarer Struktur und individueller Gestaltung.", result:"Professioneller Auftritt. Bessere Nutzung auf jedem Gerät." }
+/* Pathfinder selector */
+const paths = [
+  { tag: "Automatisierung", text: "Wiederkehrende Aufgaben wie Dateneingabe, Abgleiche oder Dokumentenerstellung lassen sich oft automatisieren — ohne das bestehende System zu ersetzen.", link: "#svc-automatisierung" },
+  { tag: "Individuelle Software", text: "Wenn Excel, E-Mail oder Papier an ihre Grenzen stoßen, entsteht oft ein einfaches internes Tool, das genau zum Arbeitsablauf passt.", link: "#svc-software" },
+  { tag: "Schnittstellen", text: "Verschiedene Programme, die heute getrennt laufen, lassen sich über Schnittstellen verbinden, damit Daten nicht mehrfach gepflegt werden müssen.", link: "#svc-schnittstellen" },
+  { tag: "Websites", text: "Eine veraltete oder langsame Website lässt sich durch einen klar strukturierten, modernen Auftritt ersetzen — zweisprachig, wenn gewünscht.", link: "#svc-websites" }
 ];
+document.querySelectorAll("[data-path]").forEach((button) => button.addEventListener("click", () => {
+  document.querySelectorAll("[data-path]").forEach((b) => b.setAttribute("aria-selected", "false"));
+  button.setAttribute("aria-selected", "true");
+  const item = paths[Number(button.dataset.path)];
+  document.querySelector("[data-path-tag]").textContent = item.tag;
+  document.querySelector("[data-path-text]").textContent = item.text;
+  document.querySelector("[data-path-link]").href = item.link;
+}));
+
+/* Case examples */
+const cases = [
+  { label: "Automatisierung", title: "PDF-Daten ohne Abtippen übernehmen.", before: "Mitarbeiter übertragen jede Woche Daten aus PDFs manuell in Excel.", solution: "PDF hochladen, Daten automatisch erkennen, prüfen und als Excel-Datei exportieren.", result: "Weniger manuelle Eingabe. Weniger Fehler.",
+    metrics: [{ v: "35 → 2 Min", l: "Zeit je Vorgang" }, { v: "deutlich weniger", l: "Eingabefehler" }, { v: "3 entfallen", l: "Arbeitsschritte" }] },
+  { label: "Dateiverarbeitung", title: "Dokumente automatisch richtig ablegen.", before: "Rechnungen und Dokumente werden heruntergeladen, umbenannt und händisch abgelegt.", solution: "Dateien erkennen, einheitlich benennen und automatisch der richtigen Struktur zuordnen.", result: "Weniger Suchaufwand. Verlässliche Ablage." },
+  { label: "Individuelle Software", title: "Informationen an einem Ort verfügbar machen.", before: "Wichtige Informationen verteilen sich über Excel-Listen, E-Mails und Papier.", solution: "Eine einfache interne Web-App bündelt Daten, Status und Zuständigkeiten zentral.", result: "Ein gemeinsamer Stand. Klare Verantwortlichkeiten." },
+  { label: "Reports", title: "Wiederkehrende Reports automatisch erstellen.", before: "Jeden Monat werden Zahlen manuell aus mehreren Quellen zusammengetragen.", solution: "Daten werden automatisch zusammengeführt und als fertiger Report bereitgestellt.", result: "Reports stehen pünktlich, ohne manuellen Aufwand." },
+  { label: "Website", title: "Einen veralteten Auftritt klar erneuern.", before: "Die Website ist mobil schwer nutzbar, langsam und passt nicht mehr zum Unternehmen.", solution: "Eine schnelle, responsive Website mit klarer Struktur und individueller Gestaltung.", result: "Professioneller Auftritt. Bessere Nutzung auf jedem Gerät." }
+];
+const metricsBox = document.querySelector("[data-case-metrics]");
+const metricsNote = document.querySelector("[data-metrics-note]");
 document.querySelectorAll("[data-case]").forEach((button) => button.addEventListener("click", () => {
   document.querySelectorAll("[data-case]").forEach((b) => b.setAttribute("aria-selected", "false"));
   button.setAttribute("aria-selected", "true");
   const item = cases[Number(button.dataset.case)];
   const panel = document.querySelector("#case-panel"); panel.style.opacity = ".35";
-  setTimeout(() => { for (const key of ["label","title","before","solution","result"]) document.querySelector(`[data-case-${key}]`).textContent = item[key]; panel.style.opacity = "1"; }, 160);
+  setTimeout(() => {
+    for (const key of ["label", "title", "before", "solution", "result"]) document.querySelector(`[data-case-${key}]`).textContent = item[key];
+    if (item.metrics) {
+      item.metrics.forEach((m, i) => {
+        document.querySelector(`[data-m${i}-v]`).textContent = m.v;
+        document.querySelector(`[data-m${i}-l]`).textContent = m.l;
+      });
+      metricsBox.hidden = false; metricsNote.hidden = false;
+    } else {
+      metricsBox.hidden = true; metricsNote.hidden = true;
+    }
+    panel.style.opacity = "1";
+  }, 160);
 }));
 
 const form = document.querySelector("[data-project-form]");
