@@ -1,3 +1,5 @@
 *.png
+!dist/logo-mark.png
+!dist/favicon-*.png
 site-archive*.tar.gz
 .chrome-qa-*/
