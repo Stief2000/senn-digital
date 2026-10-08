@@ -41,14 +41,20 @@ document.querySelectorAll("[data-path]").forEach((button) => button.addEventList
 /* Case examples */
 const cases = [
   { label: "Automatisierung", title: "PDF-Daten ohne Abtippen übernehmen.", before: "Mitarbeiter übertragen jede Woche Daten aus PDFs manuell in Excel.", solution: "PDF hochladen, Daten automatisch erkennen, prüfen und als Excel-Datei exportieren.", result: "Weniger manuelle Eingabe. Weniger Fehler.",
-    metrics: [{ v: "35 → 2 Min", l: "Zeit je Vorgang" }, { v: "deutlich weniger", l: "Eingabefehler" }, { v: "3 entfallen", l: "Arbeitsschritte" }] },
-  { label: "Dateiverarbeitung", title: "Dokumente automatisch richtig ablegen.", before: "Rechnungen und Dokumente werden heruntergeladen, umbenannt und händisch abgelegt.", solution: "Dateien erkennen, einheitlich benennen und automatisch der richtigen Struktur zuordnen.", result: "Weniger Suchaufwand. Verlässliche Ablage." },
-  { label: "Individuelle Software", title: "Informationen an einem Ort verfügbar machen.", before: "Wichtige Informationen verteilen sich über Excel-Listen, E-Mails und Papier.", solution: "Eine einfache interne Web-App bündelt Daten, Status und Zuständigkeiten zentral.", result: "Ein gemeinsamer Stand. Klare Verantwortlichkeiten." },
-  { label: "Reports", title: "Wiederkehrende Reports automatisch erstellen.", before: "Jeden Monat werden Zahlen manuell aus mehreren Quellen zusammengetragen.", solution: "Daten werden automatisch zusammengeführt und als fertiger Report bereitgestellt.", result: "Reports stehen pünktlich, ohne manuellen Aufwand." },
-  { label: "Website", title: "Einen veralteten Auftritt klar erneuern.", before: "Die Website ist mobil schwer nutzbar, langsam und passt nicht mehr zum Unternehmen.", solution: "Eine schnelle, responsive Website mit klarer Struktur und individueller Gestaltung.", result: "Professioneller Auftritt. Bessere Nutzung auf jedem Gerät." }
+    metrics: [{ v: "35 → 2 Min", l: "Zeit je Vorgang" }, { v: "deutlich weniger", l: "Eingabefehler" }, { v: "3 entfallen", l: "Arbeitsschritte" }],
+    visual: `<div class="case-mock"><div class="case-mock-bar"><i></i><i></i><i></i><span>Rechnung_014.pdf</span></div><div class="ui-frame"><ul class="ui-checklist"><li class="done"><i></i>Rechnungsnummer erkannt</li><li class="done"><i></i>Datum erkannt</li><li class="done"><i></i>Betrag erkannt</li><li class="pending"><i></i>IBAN wird geprüft …</li></ul></div></div>` },
+  { label: "Dateiverarbeitung", title: "Dokumente automatisch richtig ablegen.", before: "Rechnungen und Dokumente werden heruntergeladen, umbenannt und händisch abgelegt.", solution: "Dateien erkennen, einheitlich benennen und automatisch der richtigen Struktur zuordnen.", result: "Weniger Suchaufwand. Verlässliche Ablage.",
+    visual: `<div class="case-mock"><div class="case-mock-bar"><i></i><i></i><i></i><span>Dateiablage</span></div><div class="ui-frame"><div class="ui-table"><div class="ui-row ui-row-head"><span>Datei</span><span>Ordner</span><span>Status</span></div><div class="ui-row"><span>Rechnung_014.pdf</span><span>Kunden/2026</span><span class="pill pill-done">Abgelegt</span></div><div class="ui-row"><span>Lieferschein_22.pdf</span><span>Lager/Okt</span><span class="pill pill-done">Abgelegt</span></div><div class="ui-row"><span>scan_0391.jpg</span><span>Posteingang</span><span class="pill pill-progress">Wird sortiert</span></div></div></div></div>` },
+  { label: "Individuelle Software", title: "Informationen an einem Ort verfügbar machen.", before: "Wichtige Informationen verteilen sich über Excel-Listen, E-Mails und Papier.", solution: "Eine einfache interne Web-App bündelt Daten, Status und Zuständigkeiten zentral.", result: "Ein gemeinsamer Stand. Klare Verantwortlichkeiten.",
+    visual: `<div class="case-mock"><div class="case-mock-bar"><i></i><i></i><i></i><span>Team-Dashboard</span></div><div class="ui-frame"><div class="ui-stats"><div class="ui-stat"><strong>12</strong><span>Offene Vorgänge</span></div><div class="ui-stat"><strong>8</strong><span>Heute bearbeitet</span></div><div class="ui-stat"><strong>4 Min</strong><span>Ø Bearbeitungszeit</span></div></div><div class="ui-chart"><i style="--h:38%"></i><i style="--h:62%"></i><i style="--h:45%"></i><i style="--h:80%"></i><i style="--h:55%"></i><i style="--h:70%"></i><i style="--h:90%"></i></div></div></div>` },
+  { label: "Reports", title: "Wiederkehrende Reports automatisch erstellen.", before: "Jeden Monat werden Zahlen manuell aus mehreren Quellen zusammengetragen.", solution: "Daten werden automatisch zusammengeführt und als fertiger Report bereitgestellt.", result: "Reports stehen pünktlich, ohne manuellen Aufwand.",
+    visual: `<div class="case-mock"><div class="case-mock-bar"><i></i><i></i><i></i><span>Monatsreport</span></div><div class="ui-frame"><div class="ui-export"><div class="ui-filetypes"><span>XLSX</span><span>CSV</span><span>PDF</span></div><button type="button" class="ui-export-btn" tabindex="-1">Export starten</button><small>Zuletzt exportiert vor 2 Minuten</small></div></div></div>` },
+  { label: "Website", title: "Einen veralteten Auftritt klar erneuern.", before: "Die Website ist mobil schwer nutzbar, langsam und passt nicht mehr zum Unternehmen.", solution: "Eine schnelle, responsive Website mit klarer Struktur und individueller Gestaltung.", result: "Professioneller Auftritt. Bessere Nutzung auf jedem Gerät.",
+    visual: `<div class="case-mock"><div class="case-mock-bar"><i></i><i></i><i></i><span>www.mein-betrieb.it</span></div><div class="ui-frame"><div class="ui-website-nav"><span>Logo</span><span>Leistungen</span><span>Kontakt</span></div><div class="ui-website-hero"><strong>Qualität, der man vertraut.</strong><small>Ihr Partner für Technik und Service — jetzt auch mobil.</small><em>Jetzt anfragen</em></div></div></div>` }
 ];
 const metricsBox = document.querySelector("[data-case-metrics]");
 const metricsNote = document.querySelector("[data-metrics-note]");
+const caseVisual = document.querySelector("[data-case-visual]");
 document.querySelectorAll("[data-case]").forEach((button) => button.addEventListener("click", () => {
   document.querySelectorAll("[data-case]").forEach((b) => b.setAttribute("aria-selected", "false"));
   button.setAttribute("aria-selected", "true");
@@ -65,6 +71,7 @@ document.querySelectorAll("[data-case]").forEach((button) => button.addEventList
     } else {
       metricsBox.hidden = true; metricsNote.hidden = true;
     }
+    caseVisual.innerHTML = item.visual;
     panel.style.opacity = "1";
   }, 160);
 }));

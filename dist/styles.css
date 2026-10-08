@@ -167,25 +167,20 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .metrics-note { margin: 14px 0 0; color: #bdc8f4; font-size: .82rem; font-style: italic; }
 .case-visual { position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; gap: 28px; background: var(--paper); color: var(--ink); }
 .case-visual::before { position: absolute; content: ""; inset: 0; background-image: linear-gradient(rgba(16,19,18,.08) 1px, transparent 1px), linear-gradient(90deg, rgba(16,19,18,.08) 1px, transparent 1px); background-size: 32px 32px; }
-.doc, .sheet { z-index: 1; position: relative; width: 118px; height: 154px; padding: 25px 18px; border-radius: var(--radius-sm); border: 1px solid var(--ink); background: var(--white); }
-.doc::before { position: absolute; content: ""; top: -1px; right: -1px; border-top: 28px solid var(--paper); border-left: 28px solid transparent; }
-.doc i { display: block; height: 4px; border-radius: 2px; margin-bottom: 10px; background: #cdd0ca; }
-.doc i:nth-child(2) { width: 65%; }
-.doc b, .sheet b { position: absolute; right: 10px; bottom: 10px; padding: 4px 7px; border-radius: 5px; background: var(--ink); color: var(--white); font: 700 .68rem/1 "Courier New", monospace; }
-.processing { z-index: 1; display: flex; gap: 6px; }
-.processing span { width: 7px; height: 7px; border-radius: 50%; background: var(--blue); animation: pulse 1.4s infinite; }
-.processing span:nth-child(2) { animation-delay: .18s; }
-.processing span:nth-child(3) { animation-delay: .36s; }
-.sheet { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; padding: 18px; }
-.sheet div { border-radius: 3px; border: 1px solid #c8cbc5; }
-.sheet b { background: var(--blue); }
+/* Case-visual: realistic mini app-window per example tab (reuses .ui-* mockup components) */
+.case-mock { z-index: 1; width: 400px; max-width: 86%; border-radius: var(--radius-md); border: 1px solid var(--ink); background: var(--white); overflow: hidden; box-shadow: 0 24px 60px -24px rgba(13,17,16,.4); }
+.case-mock-bar { display: flex; align-items: center; gap: 6px; height: 34px; padding: 0 14px; background: #eceee9; border-bottom: 1px solid var(--ink); }
+.case-mock-bar i { width: 7px; height: 7px; border-radius: 50%; background: #c7cac4; }
+.case-mock-bar span { margin-left: 8px; color: var(--muted-dark); font: 700 .7rem/1 "Courier New", monospace; letter-spacing: .02em; }
+.case-mock .ui-frame { background: var(--white); min-height: 0; padding: 22px; }
+.case-mock .ui-row { font-size: .82rem; }
 
-/* Mockups — dark accent section */
-.mockups { background: var(--ink); }
-.mockup-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-.mockup-card { padding: 18px; border-radius: var(--radius-lg); border: 1px solid var(--border); background: var(--surface); transition: border-color .25s, transform .25s; }
-.mockup-card:hover { border-color: rgba(36,87,255,.4); transform: translateY(-3px); }
-.mockup-label { margin: 0 0 14px; color: var(--muted-dark); font: 700 .72rem/1 "Courier New", monospace; letter-spacing: .07em; text-transform: uppercase; }
+.ui-website-nav { display: flex; justify-content: space-between; padding-bottom: 14px; margin-bottom: 18px; border-bottom: 1px solid var(--line); font: 700 .72rem/1 "Courier New", monospace; letter-spacing: .02em; color: var(--muted); }
+.ui-website-nav span:first-child { color: var(--ink); }
+.ui-website-hero strong { display: block; font-size: 1.3rem; line-height: 1.18; letter-spacing: -.01em; margin-bottom: 8px; }
+.ui-website-hero small { display: block; color: var(--muted); font-size: .84rem; margin-bottom: 16px; }
+.ui-website-hero em { display: inline-block; padding: 9px 18px; border-radius: 999px; background: var(--blue); color: var(--white); font-style: normal; font-weight: 800; font-size: .8rem; }
+
 .ui-frame { border-radius: var(--radius-md); background: var(--paper); color: var(--ink); padding: 18px; min-height: 168px; }
 
 .ui-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 0; margin-bottom: 16px; }
@@ -196,13 +191,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .ui-stat span { display: block; margin-top: 2px; color: var(--muted); font-size: .74rem; }
 .ui-chart { display: flex; align-items: flex-end; gap: 5px; height: 64px; }
 .ui-chart i { flex: 1; height: var(--h); min-height: 4px; background: var(--blue); border-radius: 4px 4px 0 0; }
-
-.ui-dropzone { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 20px 10px; border: 1.5px dashed #a9ada6; border-radius: var(--radius-sm); text-align: center; }
-.ui-dropzone svg { width: 24px; fill: none; stroke: var(--blue); stroke-width: 1.8; }
-.ui-dropzone strong { font-size: .88rem; }
-.ui-dropzone small { color: var(--muted); font-size: .8rem; }
-.ui-filechips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
-.ui-filechips span { padding: 4px 9px; border: 1px solid var(--line); border-radius: 999px; font: .74rem/1.4 "Courier New", monospace; color: var(--muted); }
 
 .ui-table { display: flex; flex-direction: column; }
 .ui-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; padding: 9px 0; border-bottom: 1px solid var(--line); font-size: .86rem; align-items: center; }
@@ -220,13 +208,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .ui-checklist li.done i::before { content: "✓"; font-size: .65rem; color: var(--ink); }
 .ui-checklist li.pending { color: var(--muted); }
 .ui-checklist li.pending i { border-style: dashed; }
-
-.ui-progress { height: 8px; border-radius: 999px; background: var(--line); overflow: hidden; margin-bottom: 16px; }
-.ui-progress span { display: block; height: 100%; width: var(--p); background: var(--blue); border-radius: 999px; }
-.ui-steps { display: flex; justify-content: space-between; gap: 4px; font: 700 .68rem/1.3 "Courier New", monospace; letter-spacing: .01em; text-transform: uppercase; color: var(--muted); text-align: center; }
-.ui-steps span { flex: 1; position: relative; }
-.ui-steps span.done { color: var(--ink); }
-.ui-steps span.active { color: var(--blue); }
 
 .ui-export { display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
 .ui-filetypes { display: flex; gap: 6px; }
@@ -263,6 +244,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .project-copy ul { margin: 28px 0 35px; padding: 0; list-style: none; }
 .project-copy li { margin: 0 0 7px; font-size: .92rem; }
 .project-copy li::before { content: "/"; margin-right: 9px; color: var(--blue); font-weight: 800; }
+.confidential-note { margin: -11px 0 0; color: var(--muted); font-size: .8rem; }
+
+.project-card + .project-card { margin-top: 28px; }
+.preview-frame-static img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+.preview-frame-static img.preview-img-left { object-position: top left; }
 
 .principles { margin-top: 36px; padding-top: 32px; border-top: 1px solid var(--border-lt-soft); }
 .principles-label { margin: 0 0 14px; color: var(--muted); font: 700 .72rem/1 "Courier New", monospace; letter-spacing: .09em; text-transform: uppercase; }
@@ -354,7 +340,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   .pathfinder-options { border-right: 0; border-bottom: 1px solid var(--border-lt-soft); }
   .service-grid { grid-template-columns: repeat(2, 1fr); }
   .service-card.span-2 { grid-column: span 2; }
-  .mockup-grid { grid-template-columns: repeat(2, 1fr); }
   .case-panel { grid-template-columns: 1fr; }
   .case-visual { min-height: 370px; order: -1; }
   .process-grid { grid-template-columns: repeat(2,1fr); }
@@ -385,15 +370,15 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   .pathfinder-panel { padding: 28px 22px; min-height: 0; }
   .service-grid { grid-template-columns: 1fr; }
   .service-card.span-2 { grid-column: span 1; }
-  .mockup-grid { grid-template-columns: 1fr; }
   .section-heading { margin-bottom: 42px; }
   .case-tabs { display: flex; overflow-x: auto; max-width: 100%; }
   .case-tabs button { flex: 0 0 auto; }
   .case-copy { padding: 28px 22px; }
   .before-after { grid-template-columns: 1fr; }
   .case-metrics { flex-wrap: wrap; row-gap: 14px; }
-  .case-visual { min-height: 260px; gap: 15px; }
-  .doc, .sheet { width: 86px; height: 120px; }
+  .case-visual { min-height: 0; padding: 24px 0; }
+  .case-mock { width: 100%; max-width: 360px; }
+  .case-mock .ui-frame { padding: 16px; }
   .process-grid { grid-template-columns: 1fr; }
   .process-grid h3 { margin-top: 20px; }
   .preview-frame { min-height: 240px; }
