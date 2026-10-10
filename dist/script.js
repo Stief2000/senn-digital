@@ -1,4 +1,4 @@
-const SITE = { brand: "Process Engine", email: "projekt@processengine.it" };
+const SITE = { brand: "SennDigital", email: "projekt@senndigital.it" };
 
 document.querySelectorAll("[data-brand]").forEach((el) => el.textContent = SITE.brand);
 document.querySelectorAll("[data-email-link]").forEach((el) => { el.textContent = SITE.email; el.href = `mailto:${SITE.email}`; });
